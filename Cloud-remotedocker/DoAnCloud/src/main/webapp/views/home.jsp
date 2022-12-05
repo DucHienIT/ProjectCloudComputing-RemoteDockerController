@@ -69,7 +69,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">Các Container đã tạo</h3>
+							<h3 class="box-title">Containers đã tạo</h3>
 							<div class="table-responsive">
 								<table class="table text-nowrap">
 									<thead>
