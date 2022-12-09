@@ -82,7 +82,11 @@ public class HomeDao {
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		channel.connect();
 		((ChannelExec) channel).setErrStream(System.err);
-		channel.disconnect();
+		
+		System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
+		
+		channel.disconnect();	
 		session.disconnect();
 
 	}
@@ -133,14 +137,18 @@ public class HomeDao {
 	public String maxPort() {
 		String sql = "select max(port) + 1 as max from containers";
 		try {
+			
 			conn = new DBconnect().getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
+				if (rs.getString(1) == null)
+					return "1000";
 				return rs.getString(1);
+			
 			}
 		} catch (Exception e) {
-
+			return "1000";
 		}
 		return "1000";
 	}
@@ -424,7 +432,7 @@ public class HomeDao {
 	public String getIp(int id)
 	{
 		String result = "";
-		String sql = "select ip_server from servers where id_server = "+id+";";
+		String sql = "select ip_server from server where id_server = "+id+";";
 		try {
 			conn = new DBconnect().getConnection();
 			ps = conn.prepareStatement(sql);
@@ -438,7 +446,7 @@ public class HomeDao {
 		return result;
 	}
 	public void deleteServer(String id_server) {
-		String sql = "delete from servers where id_server = ?";
+		String sql = "delete from server where id_server = ?";
 		try {
 			// kết nối sql
 			conn = new DBconnect().getConnection();

@@ -79,6 +79,8 @@ public class CreateController extends HttpServlet {
 		{
 			try {
 				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId());
+				
+				
 				System.out.println("ec2_ip: "+ ec2ip);
 				System.out.println("create successfull !");
 			} catch (JSchException e) {

@@ -74,7 +74,7 @@ public class HomeAdminDao {
 	{
 		List<HistoryModel> list = new ArrayList<HistoryModel>();
 		// câu truy vấn
-		String sql = "select * from containers order by port desc";
+		String sql = "select * from container order by port desc";
 		try {
 			// kết nối sql
 			conn = new DBconnect().getConnection();
