@@ -8,7 +8,7 @@ public class Config {
 	  //public static String privatekeyPath = "C:\\Users\\tranc\\cloud\\newubuntu1.pem"; // thay đổi path của key ec2 
 	  //public static String privatekeyPath = "/usr/local/tomcat/webapps/DoAnCloud.pem";
 //	  public static String privatekeyPath = "C:\\Users\\WINDOWS 10\\DoAnCloud\\DoAnCloud.pem";
-	  public static String privatekeyPath = "D:\\tai_lieu_tren_lop\\DoAnCongNghePhanMem\\ProjectCloudComputing-RemoteDockerController\\Myubuntu.pem";
+	  public static String privatekeyPath = "E:\\Learn\\cloud\\Doancuoiky\\gitname\\ProjectCloudComputing-RemoteDockerController\\Myubuntu.pem";
 	  
 	  public static String databaseName = "usercloud";
 	 

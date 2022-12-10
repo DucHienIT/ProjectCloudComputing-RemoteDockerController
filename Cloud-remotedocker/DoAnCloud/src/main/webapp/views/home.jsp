@@ -71,7 +71,7 @@
 					<div class="col-sm-12">
 						<div class="white-box">
 							<h3 class="box-title">Các Container đã tạo</h3>
-							<a href="<c:url value="/startC?cid=${o.id}&&name=${o.name}&&server=${server}"/>"
+							<a href="<c:url value="/shutdownall?server=1"/>"
 															class="btn btn-success text-white ">Stop all</a> 
 							
 							

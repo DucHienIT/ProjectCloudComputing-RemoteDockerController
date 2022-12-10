@@ -30,6 +30,28 @@ public class HomeDao {
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 
+	public void Stopall(String name,String ec2ip)throws JSchException, IOException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		InputStream in = channel.getInputStream();
+		((ChannelExec) channel).setCommand("docker container stop $(docker ps -a --filter \"" + "name" + "=" + name + "\")");
+		System.out.print("docker container stop $(docker ps -aq --filter \"" + "name" + "=" + name + "\")");
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		//System.out.println("docker ps -a --filter \"" + "name" + "=" + name + "\"");
+		
+		channel.disconnect();
+		session.disconnect();
+		//System.out.println(list.toString());
+
+		
+	}
 	public List<DetailModel> getDetail(String name,String ec2ip) throws JSchException, IOException {
 		JSch jsch = new JSch();
 		jsch.addIdentity(Config.privatekeyPath);
