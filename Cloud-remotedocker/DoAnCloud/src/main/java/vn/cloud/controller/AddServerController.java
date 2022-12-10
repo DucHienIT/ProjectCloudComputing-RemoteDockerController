@@ -20,6 +20,7 @@ import vn.cloud.model.ServerModel;
 
 @WebServlet(urlPatterns = {"/addserver"})
 public class AddServerController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +37,7 @@ public class AddServerController extends HttpServlet {
 		HomeDao hd = new HomeDao();
 
 		try {
+			/* sau khi lay duoc IP cua server moi, tien hanh lay insert lam datavase */ 
 		String ip_server = req.getParameter("ip_server");
 		hd.insertServer(ip_server);
 		

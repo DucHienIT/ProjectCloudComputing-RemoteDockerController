@@ -38,10 +38,11 @@
 			<!-- ============================================================== -->
 			<!-- Bread crumb and right sidebar toggle -->
 			<!-- ============================================================== -->
-			<div class="page-breadcrumb bg-white">
+			<div class="page-breadcrumb">
 				<div class="row align-items-center">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Quản lý container</h4>
+						
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						<div class="d-md-flex">
@@ -51,7 +52,7 @@
 										xuất</a>
 							</ol>
 						</div>
-					</div>
+					</div> 
 				</div>
 
 				<!-- /.col-lg-12 -->
@@ -62,7 +63,7 @@
 			<!-- ============================================================== -->
 			<!-- Container fluid  -->
 			<!-- ============================================================== -->
-			<div class="container-fluid">
+			<div class="container-fluid" style="background-color: #dedea2">
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
@@ -70,6 +71,10 @@
 					<div class="col-sm-12">
 						<div class="white-box">
 							<h3 class="box-title">Các Container đã tạo</h3>
+							<a href="<c:url value="/startC?cid=${o.id}&&name=${o.name}&&server=${server}"/>"
+															class="btn btn-success text-white ">Stop all</a> 
+							
+							
 							<div class="table-responsive">
 								<table class="table text-nowrap">
 									<thead>
@@ -95,8 +100,10 @@
 												<td>	
 													<div class="btn-group btn-group-justified">
 														<a href="<c:url value="/connect?name=${o.name}&&server=${server}"/>" target="_blank"
-															class="btn btn-info text-white ">Kết nối</a> <a href="<c:url value="/startC?cid=${o.id}&&name=${o.name}&&server=${server}"/>"
-															class="btn btn-success text-white ">Khởi động</a> <a
+															class="btn btn-info text-white ">Kết nối</a> 
+														<a href="<c:url value="/startC?cid=${o.id}&&name=${o.name}&&server=${server}"/>"
+															class="btn btn-success text-white ">Khởi động</a> 
+															<a
 															href="<c:url value="/stopC?cid=${o.id}&&server=${server}"/>"
 															class="btn btn-danger text-white">Tắt</a> <a href="<c:url value="/removeC?cid=${o.name}&&server=${server}"/>"
 															 class="btn btn-warning text-white ">Xóa</a>

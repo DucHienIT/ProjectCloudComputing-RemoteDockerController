@@ -43,27 +43,30 @@ public class HomeDao {
 		((ChannelExec) channel).setCommand("docker ps -a --filter \"" + "name" + "=" + name + "\"");
 		channel.connect();
 		((ChannelExec) channel).setErrStream(System.err);
-
+		//System.out.println("docker ps -a --filter \"" + "name" + "=" + name + "\"");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		String line;
 		List<DetailModel> list = new ArrayList<DetailModel>();
 		while ((line = reader.readLine()) != null) {
+			
 			ArrayList<String> arr = new ArrayList<String>();
 			String test = line.replaceAll("\\s\\s+", ",");
 			String[] words = test.split(",");
 			for (String w : words) {
 				arr.add(w);
 			}
-			if (arr.size() == 7) {
-				list.add(new DetailModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3), arr.get(4), arr.get(5),
-						arr.get(6)));
-			}
-			if (arr.size() == 6) {
+			System.out.println(arr.get(0) + " " +  arr.get(1) + " " +  arr.get(2) + " " +  arr.get(3) + " " + arr.get(4) + " " +  arr.get(5));
+			/*
+			 * if (arr.size() == 7) { list.add(new DetailModel(arr.get(0), arr.get(1),
+			 * arr.get(2), arr.get(3), arr.get(4), arr.get(5), arr.get(6))); }
+			 */
+			 {
 				list.add(new DetailModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3), arr.get(4), " ", arr.get(5)));
-			}
+			 }
 		}
 		channel.disconnect();
 		session.disconnect();
+		//System.out.println(list.toString());
 
 		return list;
 	}
@@ -161,7 +164,7 @@ public class HomeDao {
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				return rs.getString(1);
+				return rs.getString(1) ;
 			}
 		} catch (Exception e) {
 
