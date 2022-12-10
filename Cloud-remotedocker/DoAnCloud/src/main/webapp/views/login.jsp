@@ -47,7 +47,7 @@
 			style="background-image: url('templates/images/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41"> Đăng nhập Server </span>
-				<form class="login100-form validate-form p-b-33 p-t-5"
+				<form class="login50-form validate-form p-b-33 p-t-5"
 					action="<c:url value="/login"/>" method="POST">
 					<c:if test="${mess == 1}">
 					<p class="text-danger text-center">Tên đăng nhập hoặc mật khẩu không chính xác</p>
