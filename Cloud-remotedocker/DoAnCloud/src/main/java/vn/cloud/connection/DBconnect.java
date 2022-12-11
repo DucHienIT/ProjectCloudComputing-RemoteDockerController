@@ -6,11 +6,11 @@ import java.sql.DriverManager;
 import vn.cloud.config.Config;
 
 public class DBconnect {
-	String serverName = Config.ipServer1; // thầy thay đổi địa chỉ ip public của ec2
-	String dbName = Config.databaseName; // tên database đã import
-	String portNumber = "1433"; 
+	String serverName = Config.ipServer1; // thiết lập địa chỉ ip của server name
+	String dbName = Config.databaseName; // thiết lập tên của server ubuntu
+	String portNumber = "1433";  // thiết lập cổng để kết nối server ubuntu và sql trong máy ubuntu
 	String instance = "";
-	String userID = Config.userSql; //tài khoản kết nối sql
+	String userID = Config.userSql; //tạo 1 tài khàoản kết
 	String password = Config.pasSql; // mật khẩu tài khoản kết nối sql
 	public Connection getConnection()throws Exception {
         String url = "jdbc:sqlserver://"+serverName+":"+portNumber + "\\" + instance +";databaseName="+dbName;

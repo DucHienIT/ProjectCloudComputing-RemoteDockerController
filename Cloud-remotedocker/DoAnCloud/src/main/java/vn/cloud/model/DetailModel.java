@@ -1,7 +1,8 @@
 package vn.cloud.model;
 
 public class DetailModel {
-	private String id;
+	// một server bao gồm id, chứ những image nào, được tạo ra từ khi nào, trạng thái của nó (tắt, bật), cổng kết nối, và tên của nó
+	private String id;  
 	private String image;
 	private String command;
 	private String created;
