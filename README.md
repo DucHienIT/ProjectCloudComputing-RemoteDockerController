@@ -20,3 +20,4 @@ Các container mà nhóm có thể tạo: container ubuntu và container centos.
 Khi người dùng tạo container có thể lựa chọn server, chọn dung lượng ram, số cpu, ...
 
 Các bước cài đặt
+#vovanduc
