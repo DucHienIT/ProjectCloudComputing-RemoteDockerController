@@ -82,8 +82,10 @@ public class HomeDao {
 			 * if (arr.size() == 7) { list.add(new DetailModel(arr.get(0), arr.get(1),
 			 * arr.get(2), arr.get(3), arr.get(4), arr.get(5), arr.get(6))); }
 			 */
-			 {
-				list.add(new DetailModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3), arr.get(4), " ", arr.get(5)));
+			 try {
+				list.add(new DetailModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3), arr.get(4), arr.get(5), arr.get(6)));
+			 }catch(Exception e) {
+				 list.add(new DetailModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3), arr.get(4), " ", arr.get(5)));
 			 }
 		}
 		channel.disconnect();
@@ -103,7 +105,7 @@ public class HomeDao {
 		session.setConfig(config);
 		session.connect();
 		Channel channel = session.openChannel("exec");
-		((ChannelExec) channel).setCommand("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+		((ChannelExec) channel).setCommand("docker create --name " + name + " --net webnet" + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		channel.connect();
 		((ChannelExec) channel).setErrStream(System.err);
