@@ -45,7 +45,7 @@ public class HomeController extends HttpServlet {
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
 		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
+		int _id_server=hd.getId(server);	  	 
 		ec2ip = hd.getIp(_id_server);
 		for(ServerModel aModel: listserver) {
 			System.out.println("ip: " + aModel.getIp_server());

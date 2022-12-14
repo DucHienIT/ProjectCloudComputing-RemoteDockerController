@@ -500,6 +500,22 @@ public class HomeDao {
 		session.disconnect();
 
 	}
+	public void removeNetwork(String name,String ec2ip) throws JSchException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand("docker network rm " + name);
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		channel.disconnect();
+		session.disconnect();
+
+	}
 	public void setTime (Date startime,String cName)
 	{
 		String sql = "update containers set time = ? where cName = ?";
@@ -652,7 +668,41 @@ public class HomeDao {
 
 		return list;
 	}
-	
+
+	public void createNetwork(String name, String driver, String ec2ip)
+			throws JSchException, IOException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties(); 
+		config.put("StrictHostKeyChecking", "no");	
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand("docker network create -d " +driver+" "+name);
+		channel.connect(); 
+		((ChannelExec) channel).setErrStream(System.err);
+		
+		channel.disconnect();	
+		session.disconnect();
+
+	}	
+	public int getId(String ip_server)
+	{
+		int result =0 ; 
+		String sql = "select id_server from server where ip_server = \'"+ip_server+"\';";
+		try {
+			conn = new DBconnect().getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
 	public static void main(String[] args) {
 		HomeDao hDao = new HomeDao();
 		//System.out.println(hDao.getIp(5));

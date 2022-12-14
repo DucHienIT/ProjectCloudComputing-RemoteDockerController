@@ -116,7 +116,21 @@
 									</div>
 								</div>
 								<div class="form-group mb-4">
-									<label class="col-sm-12">Chọn Server</label>
+									<label class="col-sm-12">Server</label>
+									<div class="col-sm-12 border-bottom">
+										<!-- 										<select
+											class="form-select shadow-none p-0 border-0 form-control-line" name="server">
+											<option value="1">Server 1</option>
+											<option value="2">Server 2</option>
+											<option value="3">Server 3</option>
+										</select> --> 
+										<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+										<input value="${server}" name="server" readonly>
+									</div>
+								</div>
+								
+								<div class="form-group mb-4">
+									<label class="col-sm-12">Chọn Network</label>
 									<div class="col-sm-12 border-bottom">
 										<!-- 										<select
 											class="form-select shadow-none p-0 border-0 form-control-line" name="server">
@@ -128,9 +142,9 @@
 										<select
 											class="form-select shadow-none p-0 border-0 form-control-line"
 											name="server">
-											<c:forEach items="${listserver}" var="server">
-												<option value="${server.id_server}">${server.ip_server}
-													( server ${server.id_server} )</option>
+											<c:forEach items="${listNetwork}" var="network">
+												<option value="${network.name}">${network.name} (${network.driver})
+													</option>
 											</c:forEach>
 										</select>
 									</div>
@@ -159,7 +173,7 @@
 								
 								
 								<div class="form-group mb-4">
-									<label class="col-sm-12">Chọn Server</label>
+									<label class="col-sm-12">Server</label>
 									<div class="col-sm-12 border-bottom">
 										<!-- 										<select
 											class="form-select shadow-none p-0 border-0 form-control-line" name="server">
@@ -168,14 +182,15 @@
 											<option value="3">Server 3</option>
 										</select> -->
 										<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-										<select
+										<%-- <select
 											class="form-select shadow-none p-0 border-0 form-control-line"
 											name="server">
 											<c:forEach items="${listserver}" var="server">
 												<option value="${server.id_server}">${server.ip_server}
 													( server ${server.id_server} )</option>
 											</c:forEach>
-										</select>
+										</select> --%>
+										<input value="${server}" name="server" readonly>
 									</div>
 								</div>
 								

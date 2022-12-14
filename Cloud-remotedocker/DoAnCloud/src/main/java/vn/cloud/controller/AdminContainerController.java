@@ -35,7 +35,7 @@ public class AdminContainerController extends HttpServlet {
 		List<NetworkModel> listN = new ArrayList<NetworkModel>();
 		String ec2ip ="";
 		String server = req.getParameter("server");
-		
+		 
 		//lấy list server 
 		@SuppressWarnings("unchecked")
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
@@ -52,7 +52,8 @@ public class AdminContainerController extends HttpServlet {
 			e.printStackTrace();
 		}
 		req.setAttribute("listC", list);
-		req.setAttribute("server", server);
+		req.setAttribute("server", ec2ip);
+		
 		req.setAttribute("listserver", listserver);
 		req.setAttribute("listN", listN);
 		System.out.println(listN); 

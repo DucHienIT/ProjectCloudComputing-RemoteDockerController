@@ -69,7 +69,7 @@
 
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<li class="sidebar-item">
-				<select
+				<select	
 				style="width: 100%;border:0px;outline:0px;" 				
 				class="sidebar-link waves-effect waves-dark sidebar-link"
 					name="server" onchange="location = this.value;">
@@ -84,12 +84,24 @@
 						</c:forEach>
 				</select>
 				</li>
-				<li class="sidebar-item"><a
-					class="sidebar-link waves-effect waves-dark sidebar-link"
-					href="<c:url value = "/create"/>" aria-expanded="false"> <i
-						class="fa fa-table" aria-hidden="true"></i> <span
-						class="hide-menu">Tạo container và Volume</span>
-				</a></li>
+				<li class="sidebar-item">
+				<label>Tạo container và Volume</label>
+				<select
+				style="width: 100%;border:0px;outline:0px;" 				
+				class="sidebar-link waves-effect waves-dark sidebar-link"
+					name="server" onchange="location = this.value;">
+					    <option value=""> 
+					    	->	Container server ${server}
+					    </option>
+						<c:forEach items="${listserver}" var="server">
+							<option 
+								value="<c:url value = "/create?server=${server.ip_server}"/>">
+								${server.ip_server}( server ${server.ip_server} )
+								</option>
+						</c:forEach>
+				</select>
+
+</li>
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
 					aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>

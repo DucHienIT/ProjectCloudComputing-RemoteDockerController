@@ -47,14 +47,21 @@ public class CreateController extends HttpServlet {
 		//lấy list server 
 		//@SuppressWarnings("unchecked")
 		//ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
-		
+		String server = req.getParameter("server");
 		if(info.getRole() == 0)
-		{
+		{ 
 			String name = "user" + Integer.toString(info.getId()) + "-";
 			CheckTime check = new CheckTime();
 			//check.checkTimeContainner(name, ec2ip);
 			
 			req.setAttribute("listserver", listserver);
+			try {
+				req.setAttribute("listNetwork", hd.getNetwork(server));
+				req.setAttribute("server", server);
+			} catch (JSchException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 			RequestDispatcher rq = req.getRequestDispatcher("/views/create.jsp");
 			rq.forward(req, resp);
 		}
@@ -69,7 +76,7 @@ public class CreateController extends HttpServlet {
 		resp.setContentType("text/htm");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
-		String os = req.getParameter("os");
+		String os = req.getParameter("os"); 
 		String ram  = req.getParameter("ram");
 		String cpu = req.getParameter("cpu");
 		HomeDao hd = new HomeDao();
@@ -86,7 +93,7 @@ public class CreateController extends HttpServlet {
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
 		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
+		int _id_server=hd.getId(server);	 
 		ec2ip = hd.getIp(_id_server);
 		
 		if(os.equals("Ubuntu"))
@@ -96,7 +103,7 @@ public class CreateController extends HttpServlet {
 				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId());
 				
 				
-				System.out.println("ec2_ip: "+ ec2ip);
+//				System.out.println("ec2_ip: "+ ec2ip);
 				System.out.println("create successfull !");
 			} catch (JSchException e) {
 				e.printStackTrace();

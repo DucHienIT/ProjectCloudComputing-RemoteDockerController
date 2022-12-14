@@ -44,13 +44,13 @@ public class CreateVolumeController extends HttpServlet{
 		@SuppressWarnings("unchecked")
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
-		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
+		// lấy ip theo id 
+		int _id_server=hd.getId(server);	
 		ec2ip = hd.getIp(_id_server);
 		try {
 			hd.createVolume(cname, ec2ip, info.getId());
 			//hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId());
-			System.out.println("ec2_ip: "+ ec2ip);
+//			System.out.println("ec2_ip: "+ ec2ip);
 			System.out.println("create successfull !");}  catch (JSchException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class CreateVolumeController extends HttpServlet{
 				
 				System.out.println("ec2_ip: "+ ec2ip);
 				System.out.println("create successfull !");
-			} catch (JSchException e) {
+			} catch (JSchException e) { 
 				e.printStackTrace();
 			}
 		}

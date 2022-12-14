@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -64,11 +64,11 @@
 			<div class="container-fluid">
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
-				<!-- ============================================================== -->
+<!-- ============================================================== -->
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">Danh sách Container</h3> 
+							<h3 class="box-title">Danh sách Container</h3>
 							<div class="table-responsive">
 								<table class="table text-nowrap">
 									<thead>
@@ -103,22 +103,16 @@
 												</td>
 											</tr>
 										</c:forEach>
-									</tbody> 
+									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<!-- ============================================================== -->
-				<div class="container-fluid">
-				<!-- ============================================================== -->
-				<!-- Start Page Content -->
-				<!-- ============================================================== -->
-				<div class="row">
+				<div class="row"> 
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">Danh sách NetworK</h3>
+							<h3 class="box-title">Các Network</h3>
 							<div class="table-responsive">
 								<table class="table text-nowrap">
 									<thead>
@@ -127,31 +121,34 @@
 											<th class="border-top-0">NAME</th>
 											<th class="border-top-0">DRIVER</th>
 											<th class="border-top-0">SCOPE</th>
-											<th class="border-top-0">TÍNH NĂNG</th>
+											<th class="border-top-0">CHỨC NĂNG</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach begin="1" items="${listN}" var="o">
-											<tr> 
+											<tr>
 												<td>${o.networkId}</td>
 												<td>${o.name}</td>
-												<td>${o.driver}</td>
+												<td>${o.driver}</td> 
 												<td>${o.scope}</td>
-												<td>
+												<td>	
 													<div class="btn-group btn-group-justified">
-														<a href="<c:url value="/removeC?cid=${o.name}&&server=${server}"/>"
-															 class="btn btn-warning text-white ">Xóa</a>
+														 <a href="<c:url value="/removeN?nName=${o.name}&&server=${server}"/>"
+															 class="btn btn-warning text-white ">Xóa</a>  
 													</div>
 												</td>
-											</tr>
+											</tr> 
 										</c:forEach>
 									</tbody>
 								</table>
+								
+								<%-- <a href="<c:url value="/addN?server=${server}"/>"
+															 class="btn btn-warning text-white ">Thêm Network</a>  --%>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- ============================================================== -->
+				
 				<!-- ============================================================== -->
 				<!-- End PAge Content -->
 				<!-- ============================================================== -->
@@ -163,10 +160,55 @@
 				<!-- End Right sidebar -->
 				<!-- ============================================================== -->
 			</div>
+			<div class="container-fluid ">
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<!-- Row -->
+				<!-- Column -->
+				<!-- Column -->
+				<div class="col-lg-8 col-xlg-9 col-md-12">
+					<div class="card">
+						<div class="card-body">
+							<form class="form-horizontal form-material"
+								action="<c:url value="/addN"/>" method="post" >
+								<div class="form-group mb-4">
+									<label class="col-sm-12">Tên Network</label>
+									<input name="nName" type="text"> 
+								</div>
+								<div class="form-group mb-4">
+									<label class="col-sm-12">Tên Server</label>
+									<input name="server" value="${server}" type="text" readonly>
+								</div>
+								<div class="form-group mb-4">
+									<label class="col-sm-12">Chọn driver</label>
+									<div class="col-sm-12 border-bottom">
+										<select
+											class="form-select shadow-none p-0 border-0 form-control-line"
+											name="driver">
+											<option>null</option>
+											<option>host</option>
+											<option>bridge</option>
+										</select>
+									</div>
+								</div>
+								
+								
+								<div class="form-group mb-4">
+									<div class="col-sm-12">
+										<button class="btn btn-success">Tạo Network</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Column -->
+			</div>
 			<!-- ============================================================== -->
 			<!-- End Container fluid  -->
 			<!-- ============================================================== -->
-			</div> 
 			<!-- ============================================================== -->
 			<!-- footer -->
 			<!-- ============================================================== -->
@@ -175,9 +217,10 @@
 			<!-- ============================================================== -->
 		</div>
 		<!-- ============================================================== -->
-		<!-- End Page wrapper  -->
+<!-- End Page wrapper  -->
 		<!-- ============================================================== -->
 	</div>
+	
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
@@ -200,3 +243,6 @@
 </body>
 
 </html>
+ 
+   
+ 

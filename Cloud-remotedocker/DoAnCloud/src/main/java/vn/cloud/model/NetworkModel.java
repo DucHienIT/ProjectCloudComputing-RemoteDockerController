@@ -6,22 +6,27 @@ public class NetworkModel {
 	private String name;
 	private String driver;
 	private String scope;
-	public NetworkModel(String network, String name, String driver, String scope) {
+	
+	public NetworkModel() {
 		super();
-		this.networkId = network;
+	}
+	 
+	public NetworkModel(String networkId, String name, String driver, String scope) {
+		super();
+		this.networkId = networkId;
 		this.name = name;
 		this.driver = driver;
 		this.scope = scope;
 	}
-	public NetworkModel() {
-		super();
-	}
-	public String getNetwork() {
+
+	public String getNetworkId() {
 		return networkId;
 	}
-	public void setNetwork(String network) {
-		this.networkId = network;
+
+	public void setNetworkId(String networkId) {
+		this.networkId = networkId;
 	}
+
 	public String getName() {
 		return name;
 	}
