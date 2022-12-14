@@ -141,17 +141,17 @@ public class HomeDao {
 		JSch jsch = new JSch();
 		jsch.addIdentity(Config.privatekeyPath);
 		Session session = jsch.getSession("ubuntu", ec2ip, 22);
-		Properties config = new Properties();
-		config.put("StrictHostKeyChecking", "no");
+		Properties config = new Properties(); 
+		config.put("StrictHostKeyChecking", "no");	
 		session.setConfig(config);
 		session.connect();
 		Channel channel = session.openChannel("exec");
 		((ChannelExec) channel).setCommand("docker create --name " + name + " --net webnet" + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
-		channel.connect();
+		channel.connect(); 
 		((ChannelExec) channel).setErrStream(System.err);
 		
-		System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+		System.out.println("docker create --name " + name + " --net webnet" + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		
 		channel.disconnect();	
@@ -168,12 +168,12 @@ public class HomeDao {
 		session.setConfig(config);
 		session.connect();
 		Channel channel = session.openChannel("exec");
-		((ChannelExec) channel).setCommand("docker create --name " + name + "--volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
+		((ChannelExec) channel).setCommand("docker create --name " + name + " --volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
-		channel.connect();
+		channel.connect(); 
 		((ChannelExec) channel).setErrStream(System.err);
-		
-		System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+		 
+		System.out.println("docker create --name " + name + " --volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		
 		channel.disconnect();	
@@ -368,7 +368,7 @@ public class HomeDao {
 		Channel channel = session.openChannel("exec");
 		((ChannelExec) channel).setCommand("docker volume rm " + vname);
 		channel.connect();
-		((ChannelExec) channel).setErrStream(System.err);
+		((ChannelExec) channel).setErrStream(System.err); 
 		channel.disconnect();
 		session.disconnect();
 
