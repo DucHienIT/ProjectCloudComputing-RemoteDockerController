@@ -73,7 +73,7 @@
 					<div class="card">
 						<div class="card-body">
 							<form class="form-horizontal form-material"
-								action="<c:url value="/create"/>" method="post">
+								action="<c:url value="/createCinV"/>" method="post">
 								<div class="form-group mb-4">
 									<label class="col-sm-12">Chọn hệ điều hành</label>
 									<div class="col-sm-12 border-bottom">

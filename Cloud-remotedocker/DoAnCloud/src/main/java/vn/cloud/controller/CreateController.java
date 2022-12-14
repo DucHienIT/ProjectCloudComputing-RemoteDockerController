@@ -92,7 +92,8 @@ public class CreateController extends HttpServlet {
 		if(os.equals("Ubuntu"))
 		{
 			try {
-				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId());
+				hd.createContainerinvolume(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"));
+				
 				
 				
 				System.out.println("ec2_ip: "+ ec2ip);
@@ -104,7 +105,9 @@ public class CreateController extends HttpServlet {
 		if(os.equals("Centos"))
 		{
 			try {
-				hd.createContainer(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip,info.getId());
+				hd.createContainerinvolume(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"));
+				
+				//hd.createContainer(cname,, ram, cpu, port,ec2ip,info.getId());
 			} catch (JSchException e) {
 				e.printStackTrace();
 			}
