@@ -23,6 +23,7 @@ import vn.cloud.config.Config;
 import vn.cloud.connection.DBconnect;
 import vn.cloud.model.DetailModel;
 import vn.cloud.model.ImageModel;
+import vn.cloud.model.NetworkModel;
 import vn.cloud.model.ServerModel;
 import vn.cloud.model.VolumeModel;
 
@@ -608,6 +609,50 @@ public class HomeDao {
 
 		}
 	}
+	
+	public List<NetworkModel> getNetwork(String ec2ip) throws JSchException, IOException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		InputStream in = channel.getInputStream();
+		((ChannelExec) channel).setCommand("docker network ls");
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		//System.out.println("docker ps -a --filter \"" + "name" + "=" + name + "\"");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		String line;
+		List<NetworkModel> list = new ArrayList<NetworkModel>();
+		while ((line = reader.readLine()) != null) {
+			
+			ArrayList<String> arr = new ArrayList<String>();
+			String test = line.replaceAll("\\s\\s+", ",");
+			String[] words = test.split(",");
+			for (String w : words) {
+				arr.add(w);
+			}
+//			System.out.println(arr.get(0) + " " +  arr.get(1) + " " +  arr.get(2) + " " +  arr.get(3) + " " + arr.get(4) + " " +  arr.get(5));
+			/*
+			 * if (arr.size() == 7) { list.add(new DetailModel(arr.get(0), arr.get(1),
+			 * arr.get(2), arr.get(3), arr.get(4), arr.get(5), arr.get(6))); }
+			 */
+			 try {
+				list.add(new NetworkModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3)));
+			 }catch(Exception e) {
+				 list.add(new NetworkModel(arr.get(0), arr.get(1), arr.get(2), arr.get(3)));
+			 }
+		}
+		channel.disconnect();
+		session.disconnect();
+		//System.out.println(list.toString());
+
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		HomeDao hDao = new HomeDao();
 		//System.out.println(hDao.getIp(5));

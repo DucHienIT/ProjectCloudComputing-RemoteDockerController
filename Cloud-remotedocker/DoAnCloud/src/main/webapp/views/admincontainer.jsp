@@ -68,7 +68,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">Danh sách Container</h3>
+							<h3 class="box-title">Danh sách Container</h3> 
 							<div class="table-responsive">
 								<table class="table text-nowrap">
 									<thead>
@@ -103,12 +103,55 @@
 												</td>
 											</tr>
 										</c:forEach>
+									</tbody> 
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- ============================================================== -->
+				<div class="container-fluid">
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">
+							<h3 class="box-title">Danh sách NetworK</h3>
+							<div class="table-responsive">
+								<table class="table text-nowrap">
+									<thead>
+										<tr>
+											<th class="border-top-0">NETWORK ID</th>
+											<th class="border-top-0">NAME</th>
+											<th class="border-top-0">DRIVER</th>
+											<th class="border-top-0">SCOPE</th>
+											<th class="border-top-0">TÍNH NĂNG</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach begin="1" items="${listN}" var="o">
+											<tr> 
+												<td>${o.networkId}</td>
+												<td>${o.name}</td>
+												<td>${o.driver}</td>
+												<td>${o.scope}</td>
+												<td>
+													<div class="btn-group btn-group-justified">
+														<a href="<c:url value="/removeC?cid=${o.name}&&server=${server}"/>"
+															 class="btn btn-warning text-white ">Xóa</a>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- ============================================================== -->
 				<!-- ============================================================== -->
 				<!-- End PAge Content -->
 				<!-- ============================================================== -->
@@ -123,6 +166,7 @@
 			<!-- ============================================================== -->
 			<!-- End Container fluid  -->
 			<!-- ============================================================== -->
+			</div> 
 			<!-- ============================================================== -->
 			<!-- footer -->
 			<!-- ============================================================== -->

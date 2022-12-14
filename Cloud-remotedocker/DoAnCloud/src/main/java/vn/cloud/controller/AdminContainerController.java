@@ -17,6 +17,7 @@ import com.jcraft.jsch.JSchException;
 import vn.cloud.config.Config;
 import vn.cloud.dao.HomeDao;
 import vn.cloud.model.DetailModel;
+import vn.cloud.model.NetworkModel;
 import vn.cloud.model.ServerModel;
 
 @WebServlet(urlPatterns = {"/admincontainer"})
@@ -31,6 +32,7 @@ public class AdminContainerController extends HttpServlet {
 		HomeDao hd = new HomeDao();
 		HttpSession session = req.getSession();
 		List<DetailModel> list = new ArrayList<DetailModel>();
+		List<NetworkModel> listN = new ArrayList<NetworkModel>();
 		String ec2ip ="";
 		String server = req.getParameter("server");
 		
@@ -44,6 +46,7 @@ public class AdminContainerController extends HttpServlet {
 		
 		try {
 			list = hd.getAllContainer(ec2ip);
+			listN = hd.getNetwork(ec2ip);
 		} catch (JSchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,6 +54,8 @@ public class AdminContainerController extends HttpServlet {
 		req.setAttribute("listC", list);
 		req.setAttribute("server", server);
 		req.setAttribute("listserver", listserver);
+		req.setAttribute("listN", listN);
+		System.out.println(listN); 
 		RequestDispatcher rq = req.getRequestDispatcher("/views/admincontainer.jsp");
 		rq.forward(req, resp);
 	}
