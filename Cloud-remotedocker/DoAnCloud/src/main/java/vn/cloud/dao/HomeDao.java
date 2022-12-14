@@ -169,7 +169,29 @@ public class HomeDao {
 		session.connect();
 		Channel channel = session.openChannel("exec");
 		((ChannelExec) channel).setCommand("docker volume create " + name
-				 + "-v /home/user" + userId+"/:/user" +userId+"/ ");
+				);
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		
+		//System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+		//		+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
+		
+		channel.disconnect();	
+		session.disconnect();
+
+	}
+	public void deleteVolume(String name,String ec2ip,int userId)
+			throws JSchException, IOException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand("docker volume create " + name
+				);
 		channel.connect();
 		((ChannelExec) channel).setErrStream(System.err);
 		
