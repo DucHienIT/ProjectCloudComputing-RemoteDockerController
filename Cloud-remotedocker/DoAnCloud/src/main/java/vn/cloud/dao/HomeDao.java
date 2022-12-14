@@ -335,6 +335,22 @@ public class HomeDao {
 		session.disconnect();
 
 	}
+	public void remvoVolume(String vname,String ec2ip) throws JSchException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand("docker volume rm " + vname);
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		channel.disconnect();
+		session.disconnect();
+
+	}
 
 	public List<DetailModel> getAllContainer(String ec2ip) throws JSchException, IOException {
 		JSch jsch = new JSch();

@@ -141,9 +141,9 @@
 												
 												<td>	
 													<div class="btn-group btn-group-justified">
-														 <a href="<c:url value="/removeC?cid=${o.name}&&server=${server}"/>"
+														 <a href="<c:url value="/removeV?vname=${o.name}&&server=${server}"/>"
 															 class="btn btn-warning text-white ">Xóa</a>
-															 <a href="<c:url value="/createimage?name=${o.name}&&server=${server}"/>"
+															 <a href="<c:url value="/createCinV?name=${o.name}&&server=${server}"/>"
 															 class="btn btn-primary text-white ">Tạo Container</a>
 													</div>
 												</td>

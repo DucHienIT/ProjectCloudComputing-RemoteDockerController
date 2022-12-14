@@ -88,7 +88,7 @@
 					class="sidebar-link waves-effect waves-dark sidebar-link"
 					href="<c:url value = "/create"/>" aria-expanded="false"> <i
 						class="fa fa-table" aria-hidden="true"></i> <span
-						class="hide-menu">Tạo container</span>
+						class="hide-menu">Tạo container và Volume</span>
 				</a></li>
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"

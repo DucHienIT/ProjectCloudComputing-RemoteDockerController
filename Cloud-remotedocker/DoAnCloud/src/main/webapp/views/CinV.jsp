@@ -135,6 +135,11 @@
 										</select>
 									</div>
 								</div>
+								<div class="form-group mb-4">
+									<label class="col-sm-12">Volume</label>
+									<input name="vname" value="${vname}" readonly>
+								</div>
+								
 								
 								<div class="form-group mb-4">
 									<div class="col-sm-12">
@@ -145,49 +150,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 col-xlg-9 col-md-12">
-					<div class="card">
-						<div class="card-body">
-							<form class="form-horizontal form-material"
-								action="<c:url value="/createV"/>" method="post">
-								<div class="form-group mb-4">
-									<label class="col-sm-12">Tên Volume</label>
-									<div class="col-sm-12 border-bottom">
-										<input name="vname">
-									</div>
-								</div>
-								
-								
-								<div class="form-group mb-4">
-									<label class="col-sm-12">Chọn Server</label>
-									<div class="col-sm-12 border-bottom">
-										<!-- 										<select
-											class="form-select shadow-none p-0 border-0 form-control-line" name="server">
-											<option value="1">Server 1</option>
-											<option value="2">Server 2</option>
-											<option value="3">Server 3</option>
-										</select> -->
-										<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-										<select
-											class="form-select shadow-none p-0 border-0 form-control-line"
-											name="server">
-											<c:forEach items="${listserver}" var="server">
-												<option value="${server.id_server}">${server.ip_server}
-													( server ${server.id_server} )</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group mb-4">
-									<div class="col-sm-12">
-										<button class="btn btn-success">Tạo Volume</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
+				
 				<!-- Column -->
 			</div>
 			<!-- Row -->
