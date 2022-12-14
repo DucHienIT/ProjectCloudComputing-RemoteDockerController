@@ -24,6 +24,7 @@ import vn.cloud.connection.DBconnect;
 import vn.cloud.model.DetailModel;
 import vn.cloud.model.ImageModel;
 import vn.cloud.model.ServerModel;
+import vn.cloud.model.VolumeModel;
 
 public class HomeDao {
 	Connection conn = null;
@@ -51,6 +52,46 @@ public class HomeDao {
 		//System.out.println(list.toString());
 
 		
+	}
+	public List<VolumeModel> getVolume(String name,String ec2ip) throws IOException, JSchException{
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		InputStream in = channel.getInputStream();
+		((ChannelExec) channel).setCommand("docker volume ls --filter \"" + "name" + "=" + name + "\"");
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		//System.out.println("docker ps -a --filter \"" + "name" + "=" + name + "\"");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		String line;
+		List<VolumeModel> list = new ArrayList<VolumeModel>();
+		while ((line = reader.readLine()) != null) {
+			
+			ArrayList<String> arr = new ArrayList<String>();
+			String test = line.replaceAll("\\s\\s+", ",");
+			String[] words = test.split(",");
+			for (String w : words) {
+				arr.add(w);
+			}
+			//System.out.println(arr.get(0) + " " +  arr.get(1) + " " +  arr.get(2) + " " +  arr.get(3) + " " + arr.get(4) + " " +  arr.get(5));
+			/*
+			 * if (arr.size() == 7) { list.add(new DetailModel(arr.get(0), arr.get(1),
+			 * arr.get(2), arr.get(3), arr.get(4), arr.get(5), arr.get(6))); }
+			 */
+			 try {
+				list.add(new VolumeModel(arr.get(0), arr.get(1)));
+			 }catch(Exception e) {
+				 
+			 }
+		}
+		channel.disconnect();
+		session.disconnect();
+		return list;
 	}
 	public List<DetailModel> getDetail(String name,String ec2ip) throws JSchException, IOException {
 		JSch jsch = new JSch();
@@ -112,6 +153,28 @@ public class HomeDao {
 		
 		System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
+		
+		channel.disconnect();	
+		session.disconnect();
+
+	}
+	public void createVolume(String name,String ec2ip,int userId)
+			throws JSchException, IOException {
+		JSch jsch = new JSch();
+		jsch.addIdentity(Config.privatekeyPath);
+		Session session = jsch.getSession("ubuntu", ec2ip, 22);
+		Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no");
+		session.setConfig(config);
+		session.connect();
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand("docker volume create " + name
+				 + "-v /home/user" + userId+"/:/user" +userId+"/ ");
+		channel.connect();
+		((ChannelExec) channel).setErrStream(System.err);
+		
+		//System.out.println("docker create --name " + name + " " + " --memory=\"" + ram + "\""
+		//		+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		
 		channel.disconnect();	
 		session.disconnect();

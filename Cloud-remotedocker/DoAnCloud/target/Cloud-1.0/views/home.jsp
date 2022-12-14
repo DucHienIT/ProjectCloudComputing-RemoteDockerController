@@ -112,6 +112,41 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">
+							<h3 class="box-title">Các Volume</h3>
+							<div class="table-responsive">
+								<table class="table text-nowrap">
+									<thead>
+										<tr>
+											<th class="border-top-0">Driver</th>
+											<th class="border-top-0">name</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach begin="1" items="${listV}" var="o">
+											<tr>
+												<td>${o.driver}</td>
+												<td>${o.name}</td>
+												
+												<td>	
+													<div class="btn-group btn-group-justified">
+														 <a href="<c:url value="/removeC?cid=${o.name}&&server=${server}"/>"
+															 class="btn btn-warning text-white ">Xóa</a>
+															 <a href="<c:url value="/createimage?name=${o.name}&&server=${server}"/>"
+															 class="btn btn-primary text-white ">Tạo Container</a>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 				<!-- ============================================================== -->
 				<!-- End PAge Content -->
 				<!-- ============================================================== -->

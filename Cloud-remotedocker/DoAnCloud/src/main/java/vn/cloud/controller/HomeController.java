@@ -24,6 +24,7 @@ import vn.cloud.connection.DBconnect;
 import vn.cloud.dao.HomeDao;
 import vn.cloud.model.LoginModel;
 import vn.cloud.model.ServerModel;
+import vn.cloud.model.VolumeModel;
 import vn.cloud.model.DetailModel;;
 
 @WebServlet(urlPatterns = {"/home"})
@@ -58,9 +59,12 @@ public class HomeController extends HttpServlet {
 			check.checkTimeContainner(name, ec2ip);
 			  HomeDao p = new HomeDao(); 
 			  List<DetailModel> newlist; 
+			  List<VolumeModel> Volumelist;
 			  try {
 				newlist = p.getDetail(name, ec2ip);
+				Volumelist=p.getVolume(name, ec2ip);
 				req.setAttribute("listC", newlist);
+				req.setAttribute("listV", Volumelist);
 				
 			} catch (JSchException e) {
 				// TODO Auto-generated catch block
