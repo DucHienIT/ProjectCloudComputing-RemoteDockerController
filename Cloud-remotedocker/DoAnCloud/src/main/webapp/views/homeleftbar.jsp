@@ -74,11 +74,11 @@
 				class="sidebar-link waves-effect waves-dark sidebar-link"
 					name="server" onchange="location = this.value;">
 					    <option value=""> 
-					    	->	Container server ${server}
+					    	->	Container server 
 					    </option>
 						<c:forEach items="${listserver}" var="server">
 							<option
-								value="<c:url value ="/home?server=${server.id_server}"/>">
+								value="<c:url value ="/home?server=${server.ip_server}"/>">
 								${server.ip_server}( server ${server.id_server} )
 								</option>
 						</c:forEach>
@@ -91,12 +91,12 @@
 				class="sidebar-link waves-effect waves-dark sidebar-link"
 					name="server" onchange="location = this.value;">
 					    <option value=""> 
-					    	->	Container server ${server}
+					    	->	Container server 
 					    </option>
 						<c:forEach items="${listserver}" var="server">
 							<option 
 								value="<c:url value = "/create?server=${server.ip_server}"/>">
-								${server.ip_server}( server ${server.ip_server} )
+								${server.ip_server}( server ${server.id_server} )
 								</option>
 						</c:forEach>
 				</select>

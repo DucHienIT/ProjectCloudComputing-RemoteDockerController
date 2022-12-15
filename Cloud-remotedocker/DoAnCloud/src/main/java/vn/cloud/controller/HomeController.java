@@ -32,7 +32,7 @@ public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{	
-		HomeDao hd = new HomeDao();
+		HomeDao hd = new HomeDao(); 
 		resp.setContentType("text/htm");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
