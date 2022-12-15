@@ -137,7 +137,7 @@ public class HomeDao {
 		return list;
 	}
 
-	public void createContainer(String name, String os, String ram, String cpu, String port,String ec2ip,int userId)
+	public void createContainer(String name, String os, String ram, String cpu, String port,String ec2ip,int userId,String net)
 			throws JSchException, IOException {
 		JSch jsch = new JSch();
 		jsch.addIdentity(Config.privatekeyPath);
@@ -147,19 +147,19 @@ public class HomeDao {
 		session.setConfig(config);
 		session.connect();
 		Channel channel = session.openChannel("exec");
-		((ChannelExec) channel).setCommand("docker create --name " + name + " --net webnet" + " --memory=\"" + ram + "\""
+		((ChannelExec) channel).setCommand("docker create --name " + name + " --net "+ net + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		channel.connect(); 
 		((ChannelExec) channel).setErrStream(System.err);
 		
-		System.out.println("docker create --name " + name + " --net webnet" + " --memory=\"" + ram + "\""
+		System.out.println("docker create --name " + name + " --net "+ net + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		
 		channel.disconnect();	
 		session.disconnect();
 
 	}
-	public void createContainerinvolume(String name, String os, String ram, String cpu, String port,String ec2ip,int userId,String vname)
+	public void createContainerinvolume(String name, String os, String ram, String cpu, String port,String ec2ip,int userId,String vname,String network)
 			throws JSchException, IOException {
 		JSch jsch = new JSch();
 		jsch.addIdentity(Config.privatekeyPath);
@@ -169,13 +169,13 @@ public class HomeDao {
 		session.setConfig(config);
 		session.connect();
 		Channel channel = session.openChannel("exec");
-		((ChannelExec) channel).setCommand("docker create --name " + name + " --volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
+		((ChannelExec) channel).setCommand("docker create --name " + name +" --network "+network+ " --volume \"" +vname+"\":/tmp " + " --memory=\"" + ram + "\""
 				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		channel.connect(); 
 		((ChannelExec) channel).setErrStream(System.err);
 		 
-		System.out.println("docker create --name " + name + " --volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
-				+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
+		System.out.println("docker create --name " + name +" --network "+network+ " --volume \"" +vname+"\":/tmp --net webnet" + " --memory=\"" + ram + "\""
+		+ " --cpus=\"" + cpu + "\" -p " + port + ":22 " + "-v /home/user" + userId+"/:/user" +userId+"/ " +os);
 		
 		channel.disconnect();	
 		session.disconnect();
@@ -689,7 +689,7 @@ public class HomeDao {
 	}	
 	public int getId(String ip_server)
 	{
-		int result =0 ; 
+		int result =1 ; 
 		String sql = "select id_server from server where ip_server = \'"+ip_server+"\';";
 		try {
 			conn = new DBconnect().getConnection();
@@ -705,7 +705,8 @@ public class HomeDao {
 	}
 	public static void main(String[] args) {
 		HomeDao hDao = new HomeDao();
-		//System.out.println(hDao.getIp(5));
+		
+		System.out.println(hDao.getId("54.161.205.195"));
 	}
 	
 }

@@ -100,7 +100,7 @@ public class CreateController extends HttpServlet {
 		{
 			try {
 				
-				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId());
+				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("network"));
 				
 				
 //				System.out.println("ec2_ip: "+ ec2ip);
@@ -113,7 +113,7 @@ public class CreateController extends HttpServlet {
 		{
 			try {
 				
-				hd.createContainer(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip,info.getId());
+				hd.createContainer(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip,info.getId(),req.getParameter("network"));
 				//hd.createContainer(cname,, ram, cpu, port,ec2ip,info.getId());
 			} catch (JSchException e) {
 				e.printStackTrace();

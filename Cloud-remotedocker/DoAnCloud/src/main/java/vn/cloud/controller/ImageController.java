@@ -43,8 +43,8 @@ public class ImageController extends HttpServlet {
 			ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 			
 			// lấy ip theo id
-			int _id_server=Integer.parseInt(server);	
-			ec2ip = hd.getIp(_id_server);
+			//int _id_server=Integer.parseInt(server);	
+			ec2ip = server;//hd.getIp(_id_server);
 			
 			CheckTime check = new CheckTime();
 			check.checkTimeContainner(name, ec2ip);
@@ -65,7 +65,7 @@ public class ImageController extends HttpServlet {
 			} catch (JSchException e) {
 				e.printStackTrace();
 			}
-			req.setAttribute("server",server);
+			req.setAttribute("server",hd.getId(server));
 			req.setAttribute("listserver", listserver);
 			resp.setHeader("Refresh", "60");
 			RequestDispatcher rq = req.getRequestDispatcher("/views/image.jsp");

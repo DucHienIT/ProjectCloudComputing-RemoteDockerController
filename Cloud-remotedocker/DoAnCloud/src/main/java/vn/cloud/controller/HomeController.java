@@ -47,9 +47,9 @@ public class HomeController extends HttpServlet {
 		// lấy ip theo id
 		int _id_server=hd.getId(server);	  	 
 		ec2ip = hd.getIp(_id_server);
-		for(ServerModel aModel: listserver) {
-			System.out.println("ip: " + aModel.getIp_server());
-		}
+		//for(ServerModel aModel: listserver) {
+			//.out.println("ip: " + aModel.getIp_server());
+		//}
 	
 		//show các container
 		if(info.getRole() == 0)

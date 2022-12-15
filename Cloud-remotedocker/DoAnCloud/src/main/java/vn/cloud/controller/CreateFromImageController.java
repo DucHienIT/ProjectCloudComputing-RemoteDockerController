@@ -62,7 +62,7 @@ public class CreateFromImageController extends HttpServlet{
 		ec2ip = hd.getIp(_id_server);
 		
 		try {
-			hd.createContainer(cname,os, ram, cpu, port,ec2ip,info.getId());
+			hd.createContainer(cname,os, ram, cpu, port,ec2ip,info.getId(),req.getParameter("network"));
 		} catch (JSchException e) {
 			e.printStackTrace();
 		}

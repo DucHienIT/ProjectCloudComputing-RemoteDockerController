@@ -42,8 +42,8 @@ public class StopController extends HttpServlet {
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
 		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
-		ec2ip = hd.getIp(_id_server);
+		//int _id_server=Integer.parseInt(server);	
+		ec2ip = server;//hd.getIp(_id_server);
 		
 		try {
 			hd.stopContainer(cid, ec2ip);
@@ -52,9 +52,9 @@ public class StopController extends HttpServlet {
 			e.printStackTrace();
 		}
 		if (info.getRole() == 0) {
-			resp.sendRedirect("home?server=" + server);
+			resp.sendRedirect("home?server=" + hd.getId(server));
 		} else {
-			resp.sendRedirect("admincontainer?server=" + server);
+			resp.sendRedirect("admincontainer?server=" + hd.getId(server));
 		}
 	}
 

@@ -141,10 +141,12 @@
 										<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 										<select
 											class="form-select shadow-none p-0 border-0 form-control-line"
-											name="server">
+											name="network">
 											<c:forEach items="${listNetwork}" var="network">
+												<c:if test="${network.driver!=network.name}">
 												<option value="${network.name}">${network.name} (${network.driver})
 													</option>
+													</c:if>
 											</c:forEach>
 										</select>
 									</div>

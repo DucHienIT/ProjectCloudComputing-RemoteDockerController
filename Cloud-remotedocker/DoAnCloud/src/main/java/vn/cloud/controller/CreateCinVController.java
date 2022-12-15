@@ -33,8 +33,8 @@ public class CreateCinVController extends HttpServlet{
 		HttpSession session = req.getSession();
 		LoginModel info = (LoginModel) session.getAttribute("info");
 		HomeDao hd=new HomeDao();
-		//String ec2ip ="";
-		//String server = req.getParameter("server"); 
+		String ec2ip ="";
+		String server = req.getParameter("server"); 
 		
 		//lấy list server 
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
@@ -48,11 +48,18 @@ public class CreateCinVController extends HttpServlet{
 		
 		if(info.getRole() == 0)
 		{
-			String name = "user" + Integer.toString(info.getId()) + "-";
+			//String name = "user" + Integer.toString(info.getId()) + "-";
 			CheckTime check = new CheckTime();
 			//check.checkTimeContainner(name, ec2ip);
+			try {
+				req.setAttribute("listNetwork", hd.getNetwork(server));
+			} catch (JSchException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			req.setAttribute("vname", req.getParameter("name"));
 			req.setAttribute("listserver", listserver);
+			req.setAttribute("server", server);
 			RequestDispatcher rq = req.getRequestDispatcher("/views/CinV.jsp");
 			rq.forward(req, resp);
 		}
@@ -84,13 +91,13 @@ public class CreateCinVController extends HttpServlet{
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
 		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
-		ec2ip = hd.getIp(_id_server);
-		
+		//int _id_server=Integer.parseInt(server);	
+		//ec2ip = hd.getIp(_id_server);
+		ec2ip=server;
 		if(os.equals("Ubuntu"))
 		{
 			try {
-				hd.createContainerinvolume(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"));
+				hd.createContainerinvolume(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"),req.getParameter("net"));
 				
 				
 				System.out.println("ec2_ip: "+ ec2ip);
@@ -102,14 +109,14 @@ public class CreateCinVController extends HttpServlet{
 		if(os.equals("Centos"))
 		{ 
 			try {
-				hd.createContainerinvolume(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"));
+				hd.createContainerinvolume(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("vname"),req.getParameter("net"));
 			} catch (JSchException e) {
 				e.printStackTrace();
 			}
 		}
 		hd.insertCreate(cname, info.getId(), ram, cpu, port);
 		req.setAttribute("listserver", listserver);
-		resp.sendRedirect("home?server="+ server);
+		resp.sendRedirect("home?server="+ hd.getId(server));
 		//resp.sendRedirect("home?server=1");
 	}
 

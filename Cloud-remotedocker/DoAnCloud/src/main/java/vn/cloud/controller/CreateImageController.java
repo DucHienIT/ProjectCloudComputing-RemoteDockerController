@@ -33,8 +33,8 @@ public class CreateImageController extends HttpServlet {
 		ArrayList<ServerModel> listserver = (ArrayList<ServerModel>) session.getAttribute("listserver");
 		
 		// lấy ip theo id
-		int _id_server=Integer.parseInt(server);	
-		ec2ip = hd.getIp(_id_server);
+		//int _id_server=Integer.parseInt(server);	
+		ec2ip = server;//hd.getIp(_id_server);
 		
 //		ArrayList<ServerModel> listserver = new ArrayList<ServerModel>();
 //		try {
@@ -67,7 +67,7 @@ public class CreateImageController extends HttpServlet {
 			e.printStackTrace();
 		}
 		req.setAttribute("listserver", listserver);
-		resp.sendRedirect("image?server=" + server);
+		resp.sendRedirect("image?server=" + hd.getId(server));
 		
 	}
 
