@@ -43,7 +43,7 @@ public class AddServerController extends HttpServlet {
 		
 		ArrayList<ServerModel> listserver = new ArrayList<ServerModel>();
 		try {
-			listserver = (ArrayList<ServerModel>) hd.getListServer();
+			listserver = (ArrayList<ServerModel>) hd.getListServer();  //Lấy các Server ra
 		}
 		catch (Exception e) {
 			System.out.println(e);
@@ -52,6 +52,7 @@ public class AddServerController extends HttpServlet {
 		}
 		catch (Exception e) {
 			System.out.println(e);
+			// ------------Kiểm tra------------------
 		}
 		RequestDispatcher rq = req.getRequestDispatcher("/views/addserver.jsp");
 		rq.forward(req, resp);

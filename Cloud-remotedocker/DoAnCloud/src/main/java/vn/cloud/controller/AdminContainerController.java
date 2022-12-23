@@ -46,7 +46,7 @@ public class AdminContainerController extends HttpServlet {
 		
 		try {
 			list = hd.getAllContainer(ec2ip);
-			listN = hd.getNetwork(ec2ip);
+			listN = hd.getNetwork(ec2ip); // Lấy các list
 		} catch (JSchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

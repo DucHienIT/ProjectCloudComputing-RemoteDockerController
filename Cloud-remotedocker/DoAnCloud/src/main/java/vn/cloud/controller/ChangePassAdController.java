@@ -28,6 +28,7 @@ public class ChangePassAdController extends HttpServlet{
 		req.setAttribute("Id", req.getParameter("Id"));
 		RequestDispatcher rq = req.getRequestDispatcher("/views/changepassadmin.jsp");
 		rq.forward(req, resp);
+		// ----------------
 		}
 	}
 	@Override

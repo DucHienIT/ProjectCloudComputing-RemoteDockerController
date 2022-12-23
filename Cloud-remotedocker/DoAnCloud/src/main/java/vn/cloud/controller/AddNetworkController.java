@@ -27,6 +27,7 @@ public class AddNetworkController extends HttpServlet {
 		resp.setContentType("text/htm");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		//Lây các para
 		String name = req.getParameter("nName");
 		String server  = req.getParameter("server");
 		String driver = req.getParameter("driver");
@@ -44,7 +45,7 @@ public class AddNetworkController extends HttpServlet {
 		// lấy ip theo id
 		
 			try {
-				hd.createNetwork(name,driver, server);
+				hd.createNetwork(name,driver, server); //Gọi hamf tạo network
 				System.out.println("create successfull !");
 			} catch (JSchException e) {}
 		

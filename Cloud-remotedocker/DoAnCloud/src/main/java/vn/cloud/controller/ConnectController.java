@@ -43,6 +43,7 @@ public class ConnectController extends HttpServlet{
 		ec2ip = hd.getIp(_id_server);
 		for(ServerModel aModel: listserver) {
 			System.out.println("ip: " + aModel.getIp_server());
+			//Kiểm tra ---------------
 		}
 		
 		try {
