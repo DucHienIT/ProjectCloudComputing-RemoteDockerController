@@ -56,7 +56,7 @@ public class CreateController extends HttpServlet {
 			
 			req.setAttribute("listserver", listserver);
 			try {
-				req.setAttribute("listNetwork", hd.getNetwork(server));
+				req.setAttribute("listNetwork", hd.getNetwork(server)); // Lấy các network trong server
 				req.setAttribute("server", server);
 			} catch (JSchException | IOException e) {
 				// TODO Auto-generated catch block
@@ -79,6 +79,8 @@ public class CreateController extends HttpServlet {
 		String os = req.getParameter("os"); 
 		String ram  = req.getParameter("ram");
 		String cpu = req.getParameter("cpu");
+		//Laays các para về
+
 		HomeDao hd = new HomeDao();
 		HttpSession session = req.getSession();
 		LoginModel info = (LoginModel) session.getAttribute("info");
@@ -99,9 +101,9 @@ public class CreateController extends HttpServlet {
 		if(os.equals("Ubuntu"))
 		{
 			try {
-				
+				//Tạo container
 				hd.createContainer(cname,"sonvo123/os:ubuntu", ram, cpu, port,ec2ip ,info.getId(),req.getParameter("network"));
-				
+
 				
 //				System.out.println("ec2_ip: "+ ec2ip);
 				System.out.println("create successfull !");
@@ -114,14 +116,17 @@ public class CreateController extends HttpServlet {
 			try {
 				
 				hd.createContainer(cname,"sonvo123/os:centos", ram, cpu, port,ec2ip,info.getId(),req.getParameter("network"));
-				//hd.createContainer(cname,, ram, cpu, port,ec2ip,info.getId());
+				//hd.createContainer(cname,, ram, cpu, port,ec2ip,info.getId()); // -------//
 			} catch (JSchException e) {
 				e.printStackTrace();
+				//----- -----
 			}
 		}
 		hd.insertCreate(cname, info.getId(), ram, cpu, port);
 		req.setAttribute("listserver", listserver);
 		resp.sendRedirect("home?server="+ server);
-		//resp.sendRedirect("home?server=1");
+
+
+
 	}
 }
